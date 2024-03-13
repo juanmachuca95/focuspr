@@ -12,7 +12,14 @@ automations:
         args:
           label: "{{ calc.etr }} min review"
           color: {{ colors.red if (calc.etr >= 20) else ( colors.yellow if (calc.etr >= 5) else colors.green ) }}
-
+  notification: 
+    if: 
+      - {{ has.sendNotification }}
+    run:
+      - action: add-comment@v1
+        args:
+          comment: | 
+          Sending deploy notification . . . :rocket:
 calc:
   etr: {{ branch | estimatedReviewTime }}
 
