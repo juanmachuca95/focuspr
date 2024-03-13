@@ -72,8 +72,8 @@ automations:
     run: 
       - action: add-label@v1
         args:
-          label: "{{ pr.approvals }} approvals"
-          color: {{ colors.red if (pr.approvals == 0) else ( colors.yellow if (pr.approvals == 1) else colors.green ) }}
+          label: {{ '0 approvals' if (approvals.zero) else ( '1 approvals' if (approvals.gtZero) else '1+ approvals' ) }}
+          color: {{ colors.red if (approvals.zero) else ( colors.yellow if (approvals.gtZero) else colors.green ) }}
 
 calc:
   etr: {{ branch | estimatedReviewTime }}
@@ -87,6 +87,10 @@ has:
   label_enhancements: {{ pr.description | includes(regex=r/\[[x]\] Enhancements/) }}
   label_feature: {{ pr.description | includes(regex=r/\[[x]\] Feature/) }}
   label_refactor: {{ pr.description | includes(regex=r/\[[x]\] Refactor/) }}
+
+approvals:
+  zero: {{ pr.approvals | length == 0  }}
+  gtZero: {{ pr.approvals | length > 0 and length < 2 }}
 
 colors:
   red: 'b60205'
