@@ -14,12 +14,12 @@ automations:
   
   notification_deploy: 
     if: 
-      - true
+      - {{ has.send_notification }}
     run:
       - action: add-comment@v1
         args:
           comment: | 
-            Sending deploy notification . . .
+            Sending deploy notification . . . :rocket: 
 calc:
   etr: {{ branch | estimatedReviewTime }}
 
