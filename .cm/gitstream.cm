@@ -72,8 +72,8 @@ automations:
     run: 
       - action: add-label@v1
         args:
-          label: "{{ pr.approvals }} approvals"
-          color: {{ colors.red if (pr.approvals == 0) else ( colors.yellow if (pr.approvals == 1) else colors.green ) }}
+          label: {{ pr.approvals }} approvals
+         # color: {{ colors.red if (pr.approvals == 0) else ( colors.yellow if (pr.approvals == 1) else colors.green ) }}
 
 calc:
   etr: {{ branch | estimatedReviewTime }}
