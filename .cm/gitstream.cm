@@ -14,7 +14,7 @@ automations:
           color: {{ colors.red if (calc.etr >= 20) else ( colors.yellow if (calc.etr >= 5) else colors.green ) }}
   notification: 
     if: 
-      - {{ has.sendNotification }}
+      - {{ (has.sendNotification) }}
     run:
       - action: add-comment@v1
         args:
