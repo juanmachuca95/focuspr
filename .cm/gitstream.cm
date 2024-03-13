@@ -20,6 +20,43 @@ automations:
         args:
           comment: | 
             Sending deploy notification . . . 🚀 
+  
+  add_bug_label: 
+    if: 
+      - {{ has.label_bug }}
+    run:
+      - action: add-label@v1
+        args:
+          label: bug
+          color: {{ colors.bug }}
+  
+  add_enhancements_label: 
+    if: 
+      - {{ has.label_enhancements }}
+    run:
+      - action: add-label@v1
+        args:
+          label: enhancements
+          color: {{ colors.enhancements }}
+
+  add_feature_label: 
+    if: 
+      - {{ has.label_feature }}
+    run:
+      - action: add-label@v1
+        args:
+          label: feature
+          color: {{ colors.feature }}
+
+  add_refactor_label: 
+    if: 
+      - {{ has.label_refactor }}
+    run:
+      - action: add-label@v1
+        args:
+          label: refactor
+          color: {{ colors.refactor }}
+
 calc:
   etr: {{ branch | estimatedReviewTime }}
 
@@ -27,8 +64,16 @@ has:
   jira_ticket_in_title: {{ pr.title | includes(regex=r/\b[A-Za-z]+-\d+\b/) }}
   jira_ticket_in_desc: {{ pr.description | includes(regex=r/atlassian.net\/browse\/\w{1,}-\d{3,4}/) }}
   send_notification: {{ pr.description | includes(regex=r/\[[x]\] Send deploy notification/) }}
+  label_bug: {{ pr.description | includes(regex=r\[[x]\] Bug/) }}
+  label_enhancements: {{ pr.description | includes(regex=r\[[x]\] Enhancements/) }}
+  label_feature: {{ pr.description | includes(regex=r\[[x]\] Feature/) }}
+  label_refactor: {{ pr.description | includes(regex=r\[[x]\] Refactor/) }}
 
 colors:
   red: 'b60205'
   yellow: 'fbca04'
   green: '0e8a16'
+  bug: 'f23869'
+  enhancements: '5218fa'
+  feature: '63ffc9'
+  refactor: 'ffa733'
