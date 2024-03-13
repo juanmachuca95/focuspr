@@ -44,8 +44,8 @@ automations:
     run: 
       - action: add-comment@v1 
         args:
-          comment: 
-          | Sending deploy notification . . . :rocket: 
+          comment: | 
+          Sending deploy notification . . . :rocket: 
          
 
 # +----------------------------------------------------------------------------+
