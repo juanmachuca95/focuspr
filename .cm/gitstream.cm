@@ -14,7 +14,7 @@ automations:
   
   notification_deploy: 
     if: 
-      - {{ (has.send_notification) }}
+      - true
     run:
       - action: add-comment@v1
         args:
