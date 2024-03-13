@@ -72,7 +72,7 @@ automations:
     run: 
       - action: add-label@v1
         args:
-          label: {{ '0 approvals' if (approvals.zero) else ( '1 approvals' if (approvals.gtOne) else '1+ approvals' ) }}
+          label: {{ '0 approvals' if (approvals.zero) else ( '1 approvals' if (approvals.gtZero) else '1+ approvals' ) }}
           color: {{ colors.red if (approvals.zero) else ( colors.yellow if (approvals.gtZero) else colors.green ) }}
       - action: add-comment@v1
         args:
