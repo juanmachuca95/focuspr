@@ -38,7 +38,7 @@ automations:
         args:
           gt: 10 
 
-    notification: 
+  notification: 
     if:
       - {{ has.sendNotification }}
     run: 
