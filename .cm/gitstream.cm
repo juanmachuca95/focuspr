@@ -14,7 +14,7 @@ automations:
           color: {{ colors.red if (calc.etr >= 20) else ( colors.yellow if (calc.etr >= 5) else colors.green ) }}
   notification: 
     if: 
-      - {{ (has.sendNotification) }}
+      - {{ (has.send_notification) }}
     run:
       - action: add-comment@v1
         args:
@@ -26,7 +26,7 @@ calc:
 has:
   jira_ticket_in_title: {{ pr.title | includes(regex=r/\b[A-Za-z]+-\d+\b/) }}
   jira_ticket_in_desc: {{ pr.description | includes(regex=r/atlassian.net\/browse\/\w{1,}-\d{3,4}/) }}
-  sendNotification: {{ pr.description | includes(regex=r/\[[X]\] Send deploy notification/) }}
+  send_notification: {{ pr.description | includes(regex=r/\[[X]\] Send deploy notification/) }}
 
 colors:
   red: 'b60205'
