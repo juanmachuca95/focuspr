@@ -94,7 +94,7 @@ has:
 
 approvals:
   zero: {{ pr.approvals | length == 0  }}
-  gtZero: {{ pr.approvals | length > 0 | length < 2 }}
+  gtZero: {{ pr.approvals | length > 0 and length < 2 }}
 
 colors:
   red: 'b60205'
