@@ -59,7 +59,6 @@ calc:
 has:
   jira_ticket_in_title: {{ pr.title | includes(regex=r/\b[A-Za-z]+-\d+\b/) }}
   jira_ticket_in_desc: {{ pr.description | includes(regex=r/atlassian.net\/browse\/\w{1,}-\d{3,4}/) }}
-
   sendNotification: {{ pr.description | includes(regex=r/\[[X]\] Send deploy notification/) }}
 
 colors:
