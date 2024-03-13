@@ -20,6 +20,15 @@ automations:
         args:
           comment: | 
             Sending deploy notification . . . 🚀 
+   
+  notification_review: 
+    if: 
+      - {{ has.send_review_notification }}
+    run:
+      - action: add-comment@v1
+        args:
+          comment: | 
+            Sending review notification . . . 🕵️ 
   
   add_bug_label: 
     if: 
@@ -55,7 +64,16 @@ automations:
       - action: add-label@v1
         args:
           label: refactor
-          color: {{ colors.refactor }}
+          color: {{ pr.refactor }}
+
+  add_approval_label:
+    if:
+      - true
+    run: 
+      - action: add-label@v1
+        args:
+          label: "{{ pr.approvals }} approvals"
+          color: {{ colors.red if (pr.approvals == 0) else ( colors.yellow if (pr.approvals == 1) else colors.green ) }}
 
 calc:
   etr: {{ branch | estimatedReviewTime }}
@@ -64,6 +82,7 @@ has:
   jira_ticket_in_title: {{ pr.title | includes(regex=r/\b[A-Za-z]+-\d+\b/) }}
   jira_ticket_in_desc: {{ pr.description | includes(regex=r/atlassian.net\/browse\/\w{1,}-\d{3,4}/) }}
   send_notification: {{ pr.description | includes(regex=r/\[[x]\] Send deploy notification/) }}
+  send_review_notification: {{ pr.description | includes(regex=r/\[[x]\] Request for review (Slack)/) }}
   label_bug: {{ pr.description | includes(regex=r/\[[x]\] Bug/) }}
   label_enhancements: {{ pr.description | includes(regex=r/\[[x]\] Enhancements/) }}
   label_feature: {{ pr.description | includes(regex=r/\[[x]\] Feature/) }}
