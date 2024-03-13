@@ -74,10 +74,6 @@ automations:
         args:
           label: {{ '0 approvals' if (approvals.zero) else ( '1 approvals' if (approvals.gtZero) else '1+ approvals' ) }}
           color: {{ colors.red if (approvals.zero) else ( colors.yellow if (approvals.gtZero) else colors.green ) }}
-      - action: add-comment@v1
-        args:
-          comment: | 
-            {{ approvals.zero }} {{ approvals.gtZero }}
 
 calc:
   etr: {{ branch | estimatedReviewTime }}
