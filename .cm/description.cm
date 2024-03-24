@@ -20,3 +20,9 @@ automations:
       - action: add-comment@v1
         args: 
           comment: {{ pr.description | capture(regex=r/(?:Description.*\s.+)([\s\S]*)(?:---)/) }}
+
+      - action: add-comment@v1
+        args: 
+          comment: {{ data_msg|e }}
+
+data_msg: {{ pr.description | capture(regex=r/(?:Description.*\s.+)([\s\S]*)(?:---)/) }}
