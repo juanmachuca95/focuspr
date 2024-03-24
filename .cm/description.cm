@@ -25,4 +25,4 @@ automations:
         args: 
           comment: {{ data_msg|e }}
 
-data_msg: {{ pr.description | capture(regex=r/(?:Description.*\s.+)([\s\S]*)(?:---)/) }}
+data_msg: <p> Solicitud de Revisión del PR </p> {{ pr.description | capture(regex=r/(?:Description.*\s.+)([\s\S]*)(?:---)/) }}
