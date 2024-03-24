@@ -1,0 +1,22 @@
+# -*- mode: yaml -*-
+# This example configuration for provides basic automations to get started with gitStream.
+# View the gitStream quickstart for more examples: https://docs.gitstream.cm/examples/
+manifest:
+  version: 1.0
+
+automations:
+  test_description: 
+    if: 
+      - true 
+    run:
+      - action: add-comment@v1
+        args: 
+          comment: {{ pr.description }}
+
+      - action: add-comment@v1
+        args: 
+          comment: {{ pr.description | capture(regex=r/Description\s.*\s.+([\s\S]*)---/) }}
+      
+      - action: add-comment@v1
+        args: 
+          comment: {{ pr.description | capture(regex=r/(?:Description.*\s.+)([\s\S]*)(?:---)/) }}
